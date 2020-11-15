@@ -29,6 +29,23 @@ function attachListItemButtons(li) {
   li.appendChild(remove);
 }
 
+function refresh(){
+  for(let i = 0; i < lis.length; i++){
+    if(i == 0) {
+      lis[i].querySelector('button.up').style.display = 'none';
+      lis[i].querySelector('button.down').style.marginLeft = 'auto';
+    } else if(i == lis.length - 1){
+      lis[i].querySelector('button.down').style.display = 'none';
+      lis[i].querySelector('button.up').style.marginLeft = 'auto';
+    } else {
+      lis[i].querySelector('button.up').style.display = '';
+      lis[i].querySelector('button.down').style.display = '';
+      lis[i].querySelector('button.down').style.marginLeft = '';
+      lis[i].querySelector('button.up').style.marginLeft = 'auto';
+    }
+  }
+}
+
 
 
 // firstListItem.querySelector('button.up').style.display = 'none';
@@ -85,28 +102,18 @@ addItemButton.addEventListener('click', () => {
   attachListItemButtons(li);
   ul.appendChild(li);
   addItemInput.value = '';
+  refresh();
 });
 
 firstListItem.querySelector('button.up').style.display = 'none';
 firstListItem.querySelector('button.down').style.marginLeft = 'auto';
 lastListItem.querySelector('button.down').style.display = 'none';
 
-listDiv.querySelector('ul').addEventListener('click', function(){
-  for(let i = 0; i < lis.length; i++){
-    if(i == 0) {
-      lis[i].querySelector('button.up').style.display = 'none';
-      lis[i].querySelector('button.down').style.marginLeft = 'auto';
-    } else if(i == lis.length - 1){
-      lis[i].querySelector('button.down').style.display = 'none';
-      lis[i].querySelector('button.up').style.marginLeft = 'auto';
-    } else {
-      lis[i].querySelector('button.up').style.display = '';
-      lis[i].querySelector('button.down').style.display = '';
-      lis[i].querySelector('button.down').style.marginLeft = '';
-      lis[i].querySelector('button.up').style.marginLeft = 'auto';
-    }
-  }
+listDiv.querySelector('ul').addEventListener('click', function(e){
+  refresh();
 });
+
+
 
 // // listening for down button click on the first item on the list
 // firstListItem.querySelector('button.down').addEventListener('click', function(){
